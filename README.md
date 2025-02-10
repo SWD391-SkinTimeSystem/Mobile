@@ -67,8 +67,8 @@ npx expo start
 
 3️⃣ Chạy ứng dụng trên trình duyệt (Web)
 
-npx expo start --web
-// Expo sẽ yêu cầu cài thêm 1 bộ hay gói gì nữa ấy mới cho run trên web. 
+npx expo start [ dành cho phiên bản chạy trên web ] --web <br>
+npx expo install react-dom react-native-web @expo/metro-runtime <br>
 
 🔗 Tài Liệu Tham Khảo
 
