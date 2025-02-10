@@ -10,11 +10,11 @@
 Công Nghệ Sử Dụng
 
 🔹 **Expo**: Cung cấp bộ công cụ giúp chạy, phát triển và build ứng dụng React Native mà không cần cấu hình phức tạp. <br>
-🔹 **React Native**: Framework giúp phát triển ứng dụng di động trên iOS và Android với một codebase duy nhất bằng JavaScript.
-🔹 **JavaScript (ES6+)**: Ngôn ngữ lập trình chính của dự án.
-🔹 **React Navigation**: Thư viện điều hướng chính trong React Native.
-🔹 **NativeBase** : Bộ thư viện giao diện (UI Library) giúp xây dựng các thành phần UI đẹp mắt.
-🔹 **React Native Reanimated** : Thư viện hỗ trợ tạo hiệu ứng animation mượt mà trong React Native.
+🔹 **React Native**: Framework giúp phát triển ứng dụng di động trên iOS và Android với một codebase duy nhất bằng JavaScript.<br>
+🔹 **JavaScript (ES6+)**: Ngôn ngữ lập trình chính của dự án.<br>
+🔹 **React Navigation**: Thư viện điều hướng chính trong React Native.<br>
+🔹 **NativeBase** : Bộ thư viện giao diện (UI Library) giúp xây dựng các thành phần UI đẹp mắt.<br>
+🔹 **React Native Reanimated** : Thư viện hỗ trợ tạo hiệu ứng animation mượt mà trong React Native.<br>
 📌 **Cấu trúc cây thư mục:**  
 ```bash
 📦 MyReactNativeApp
