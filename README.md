@@ -89,3 +89,20 @@ Cung cấp API mạnh mẽ giúp tối ưu hóa hiệu suất khi xử lý anima
 ├── babel.config.js           # Cấu hình Babel
 └── README.md                 # Tài liệu hướng dẫn dự án
 
+📲 Cách Chạy Ứng Dụng
+
+1️⃣ Cài đặt các dependencies
+
+npm install
+
+2️⃣ Chạy ứng dụng trên điện thoại (Expo Go)
+
+npx expo start
+
+📌 Mở Expo Go trên điện thoại và quét mã QR để chạy ứng dụng.
+
+3️⃣ Chạy ứng dụng trên trình duyệt (Web)
+
+npx expo start --web
+
+🚀 Deployment
