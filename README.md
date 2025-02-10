@@ -57,18 +57,23 @@ Công Nghệ Sử Dụng
 
 1️⃣ Cài đặt các dependencies
 ```
-npm install ```
+npm install
+```
 
 2️⃣ Chạy ứng dụng trên điện thoại (Expo Go)
 
-```npx expo start```
+```
+npx expo start
+```
 
 📌 Mở Expo Go trên điện thoại và quét mã QR để chạy ứng dụng.
 
 3️⃣ Chạy ứng dụng trên trình duyệt (Web)
 
-```npx expo start [ dành cho phiên bản chạy trên web ] --web <br>
-npx expo install react-dom react-native-web @expo/metro-runtime <br>```
+```
+npx expo start [ dành cho phiên bản chạy trên web ] --web <br>
+npx expo install react-dom react-native-web @expo/metro-runtime <br>
+```
 
 🔗 Tài Liệu Tham Khảo
 
