@@ -9,7 +9,7 @@
 
 Công Nghệ Sử Dụng
 
-🔹 **Expo**: Cung cấp bộ công cụ giúp chạy, phát triển và build ứng dụng React Native mà không cần cấu hình phức tạp.
+🔹 **Expo**: #Cung cấp bộ công cụ giúp chạy, phát triển và build ứng dụng React Native mà không cần cấu hình phức tạp.
 🔹 **React Native**: Framework giúp phát triển ứng dụng di động trên iOS và Android với một codebase duy nhất bằng JavaScript.
 🔹 **JavaScript (ES6+)**: Ngôn ngữ lập trình chính của dự án.
 🔹 **React Navigation**: Thư viện điều hướng chính trong React Native.
