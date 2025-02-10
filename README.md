@@ -51,7 +51,7 @@ Thư viện hỗ trợ tạo hiệu ứng animation mượt mà trong React Nati
 
 Cung cấp API mạnh mẽ giúp tối ưu hóa hiệu suất khi xử lý animation.
 
-📌 **Kết quả hiển thị trên GitHub:**  
+📌 **Cấu trúc cây thư mục:**  
 ```bash
 📦 MyReactNativeApp
 ├── 📂 android/               # Mã nguồn Android (Native)
