@@ -9,48 +9,12 @@
 
 Công Nghệ Sử Dụng
 
-🔹 Expo
-
-Cung cấp bộ công cụ giúp chạy, phát triển và build ứng dụng React Native mà không cần cấu hình phức tạp.
-
-Hỗ trợ nhiều API sẵn có như Camera, Location, Notifications.
-
-🔹 React Native
-
-Framework giúp phát triển ứng dụng di động trên iOS và Android với một codebase duy nhất bằng JavaScript.
-
-Hỗ trợ hiệu năng cao với các thành phần gốc (Native Components).
-
-🔹 JavaScript (ES6+)
-
-Ngôn ngữ lập trình chính của dự án.
-
-Sử dụng cú pháp hiện đại như Arrow Functions, Async/Await, Destructuring.
-
-🔹 Node.js 18+
-
-Môi trường runtime của JavaScript giúp xử lý backend hoặc chạy các công cụ CLI.
-
-Yêu cầu Node.js 18+ để đảm bảo tính tương thích với các thư viện mới nhất.
-
-🔹 React Navigation
-
-Thư viện điều hướng chính trong React Native.
-
-Hỗ trợ Stack, Bottom Tabs, Drawer Navigation và Deep Linking.
-
-🔹 NativeBase
-
-Bộ thư viện giao diện (UI Library) giúp xây dựng các thành phần UI đẹp mắt.
-
-Cung cấp nhiều component sẵn có như Button, Card, Modal, Input.
-
-🔹 React Native Reanimated
-
-Thư viện hỗ trợ tạo hiệu ứng animation mượt mà trong React Native.
-
-Cung cấp API mạnh mẽ giúp tối ưu hóa hiệu suất khi xử lý animation.
-
+🔹 **Expo**: Cung cấp bộ công cụ giúp chạy, phát triển và build ứng dụng React Native mà không cần cấu hình phức tạp.
+🔹 **React Native**: Framework giúp phát triển ứng dụng di động trên iOS và Android với một codebase duy nhất bằng JavaScript.
+🔹 **JavaScript (ES6+)**: Ngôn ngữ lập trình chính của dự án.
+🔹 **React Navigation**: Thư viện điều hướng chính trong React Native.
+🔹 **NativeBase** : Bộ thư viện giao diện (UI Library) giúp xây dựng các thành phần UI đẹp mắt.
+🔹 **React Native Reanimated** : Thư viện hỗ trợ tạo hiệu ứng animation mượt mà trong React Native.
 📌 **Cấu trúc cây thư mục:**  
 ```bash
 📦 MyReactNativeApp
@@ -104,10 +68,7 @@ npx expo start
 3️⃣ Chạy ứng dụng trên trình duyệt (Web)
 
 npx expo start --web
-
-🚀 Deployment
-
-
+// Expo sẽ yêu cầu cài thêm 1 bộ hay gói gì nữa ấy mới cho run trên web. 
 
 🔗 Tài Liệu Tham Khảo
 
