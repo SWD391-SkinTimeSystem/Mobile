@@ -77,15 +77,7 @@ npx expo install react-dom react-native-web @expo/metro-runtime <br>
 
 🔗 Tài Liệu Tham Khảo
 
-Expo
 
-React Native
-
-React Navigation
-
-NativeBase
-
-React Native Reanimated
 
 ✨ Happy Coding! 🚀
 
