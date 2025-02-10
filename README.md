@@ -89,7 +89,7 @@ Cung cấp API mạnh mẽ giúp tối ưu hóa hiệu suất khi xử lý anima
 ├── babel.config.js           # Cấu hình Babel
 └── README.md                 # Tài liệu hướng dẫn dự án
 
-📲 Cách Chạy Ứng Dụng
+📲**Cách Chạy Ứng Dụng**
 
 1️⃣ Cài đặt các dependencies
 
@@ -106,3 +106,21 @@ npx expo start
 npx expo start --web
 
 🚀 Deployment
+
+
+
+🔗 Tài Liệu Tham Khảo
+
+Expo
+
+React Native
+
+React Navigation
+
+NativeBase
+
+React Native Reanimated
+
+✨ Happy Coding! 🚀
+
+
