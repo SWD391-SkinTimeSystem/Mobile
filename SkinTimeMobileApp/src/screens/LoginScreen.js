@@ -1,195 +1,253 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [secureText, setSecureText] = useState(true);
-  const navigation = useNavigation();
-
-  const handleSubmit = () => {
-    console.log("Logging in with", email, password);
-    // Ví dụ: navigation.navigate("Home");
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState } from 'react';
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity,
+  SafeAreaView,
+  Image,
+  StatusBar
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import useRegister from '../hooks/useAuth';
+const SignInScreen = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const { login, isLoading, setIsLoading, error, success } = useRegister();
+  const handleLogin = async () => {
+    console.log("Login button is pressed!");
+    if (isLoading) return; // Tránh gọi nhiều lần khi đang loading
+    setIsLoading(true); // Bắt đầu loading
+  
+    try {
+      console.log("Sign In Pressed");
+      const data = { account: email, password: password };
+      const response = await login(data); // Gọi API đăng nhập
+  
+      if (response && response.data) {
+        const { access_token, refresh_token } = response.data;
+  
+        if (access_token && refresh_token) {
+          // Lưu cả accessToken & refreshToken vào AsyncStorage
+          await AsyncStorage.multiSet([
+            ["accessToken", access_token],
+            ["refreshToken", refresh_token],
+          ]);
+          console.log("Lưu thành công accessToken & refreshToken vào AsyncStorage");
+          navigation.replace("Home"); // Chuyển đến màn hình Home
+        } else {
+          console.log("Login Failed: Thiếu token");
+        }
+      } else {
+        console.log("Login Failed: Không có dữ liệu từ server");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  const handleRegister = () => {
-    console.log("Navigate to Register screen");
-    // Điều hướng sang màn hình Register
-    navigation.navigate("Register");
-  };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Đăng nhập</Text>
-      <Text style={styles.subtitle}>Chào mừng quay trở lại!</Text>
-      <Text style={styles.description}>
-        Để đặt lịch, vui lòng đăng nhập bằng thông tin cá nhân của bạn
-      </Text>
-
-      {/* Form Email */}
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      {/* Form Password + icon eye */}
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.inputPassword}
-          placeholder="Mật khẩu"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={secureText}
-        />
-        <TouchableOpacity onPress={() => setSecureText(!secureText)}>
-          <Ionicons
-            name={secureText ? "eye-off" : "eye"}
-            size={24}
-            color="gray"
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      
+      <View style={styles.content}>
+        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.subtitle}>Hi! Welcome back, you've been missed</Text>
+        
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Email</Text>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
+        </View>
+        
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Password</Text>
+          <View style={styles.passwordContainer}>
+            <TextInput
+              style={[styles.input, styles.passwordInput]}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}
+              placeholder="Enter your password"
+            />
+            <TouchableOpacity 
+              style={styles.passwordToggle}
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Ionicons 
+                name={showPassword ? "eye-off-outline" : "eye-outline"} 
+                size={24} 
+                color="#555" 
+              />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.forgotPassword} onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
+          <Text style={styles.signInButtonText}>Sign In</Text>
         </TouchableOpacity>
+        
+        <View style={styles.orContainer}>
+          <Text style={styles.orText}>Or sign in with</Text>
+        </View>
+        
+        <View style={styles.socialButtonsContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Image 
+              source={{ uri: 'https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png' }} 
+              style={styles.socialIcon} 
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Image 
+                source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTMZw4e6TxeOwvlJ1ErxPR3rNW9XlnbiGx8kD6ZPxYumruzTpL_Ycr2TTXkp_xGtCCbWM&usqp=CAU' }}
+                style={styles.socialIcon} 
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Image 
+              source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1200px-Facebook_Logo_%282019%29.png' }} 
+              style={styles.socialIcon} 
+            />
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.noAccountContainer}>
+          <Text style={styles.noAccountText}>Don't have an account? </Text>
+          <TouchableOpacity>
+            <Text style={styles.signUpText} onPress={() => navigation.navigate('Register')}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
-      </TouchableOpacity>
-
-      {/* Nút Đăng nhập */}
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Đăng nhập</Text>
-      </TouchableOpacity>
-
-      {/* Nút Đăng kí */}
-      <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
-        <Text style={styles.registerButtonText}>Đăng kí</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.orContinue}>Hoặc tiếp tục với</Text>
-
-      <View style={styles.socialButtons}>
-        <TouchableOpacity style={styles.socialButton}>
-          <Image source={require("../img/facebook.png")} style={styles.socialIcon} />
-          <Text>Đăng nhập với Facebook</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.socialButton}>
-          <Image source={require("../img/google.png")} style={styles.socialIcon} />
-          <Text>Đăng nhập với Google</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
-    paddingHorizontal: 20,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: '#FFFFFF',
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 24,
+    justifyContent: 'center',
   },
   title: {
-    fontSize: 40,
-    fontWeight: "bold",
-    color: "#1DB954",
-    textAlign: "center",
-    marginBottom: 30,
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
   },
   subtitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10,
+    fontSize: 14,
+    color: '#888',
+    textAlign: 'center',
+    marginBottom: 32,
   },
-  description: {
-    textAlign: "center",
-    color: "gray",
-    marginBottom: 30,
+  inputContainer: {
+    marginBottom: 16,
+  },
+  inputLabel: {
+    fontSize: 14,
+    marginBottom: 6,
+    color: '#333',
   },
   input: {
-    width: "100%",
     height: 50,
-    borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    backgroundColor: "#FFF",
+    borderColor: '#EEEEEE',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#F8F8F8',
   },
   passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 10,
-    backgroundColor: "#FFF",
-    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
   },
-  inputPassword: {
+  passwordInput: {
     flex: 1,
-    height: 50,
+  },
+  passwordToggle: {
+    position: 'absolute',
+    right: 12,
   },
   forgotPassword: {
-    color: "#1DB954",
-    textAlign: "right",
-    marginBottom: 20,
-    marginTop: 5,
+    alignSelf: 'flex-end',
+    marginTop: 8,
   },
-  button: {
-    backgroundColor: "#1DB954",
-    borderRadius: 30,
-    paddingVertical: 12,
-    alignItems: "center",
-    marginBottom: 20,
+  forgotPasswordText: {
+    color: '#888',
+    fontSize: 14,
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
+  signInButton: {
+    backgroundColor: '#3C6E47',
+    borderRadius: 8,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 24,
   },
-  registerButton: {
-    borderColor: "#1DB954",
-    borderWidth: 1,
-    borderRadius: 30,
-    paddingVertical: 12,
-    alignItems: "center",
-    marginBottom: 20,
+  signInButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
   },
-  registerButtonText: {
-    color: "#1DB954",
-    fontSize: 18,
-    fontWeight: "bold",
+  orContainer: {
+    alignItems: 'center',
+    marginBottom: 16,
   },
-  orContinue: {
-    textAlign: "center",
-    color: "gray",
-    marginBottom: 10,
+  orText: {
+    color: '#888',
+    fontSize: 14,
   },
-  socialButtons: {
-    alignItems: "center",
+  socialButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 24,
   },
   socialButton: {
-    flexDirection: "row",
-    alignItems: "center",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 10,
-    padding: 10,
-    width: "80%",
-    justifyContent: "center",
-    marginBottom: 10,
-    backgroundColor: "#FFF",
+    borderColor: '#EEEEEE',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 10,
   },
   socialIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 10,
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
+  noAccountContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  noAccountText: {
+    color: '#888',
+    fontSize: 14,
+  },
+  signUpText: {
+    color: '#3C6E47',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
 
-export default LoginScreen;
+export default SignInScreen;

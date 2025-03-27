@@ -1,25 +1,60 @@
-import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.footerText}>
-        Footer
-      </Text>
+    <View style={styles.tabBar}>
+      <TouchableOpacity style={styles.tabItem}>
+        <Ionicons name="home" size={24} color="#3a584a" />
+        <Text style={[styles.tabText, styles.activeTabText]}>Home</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.tabItem}>
+        <Ionicons name="compass-outline" size={24} color="#999" />
+        <Text style={styles.tabText}>Explore</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.tabItem}>
+        <Ionicons name="heart-outline" size={24} color="#999" />
+        <Text style={styles.tabText}>Wishlist</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.tabItem}>
+        <Ionicons name="cart-outline" size={24} color="#999" />
+        <Text style={styles.tabText}>Cart</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.tabItem}>
+        <Ionicons name="person-outline" size={24} color="#999" />
+        <Text style={styles.tabText}>Profile</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#EE9972',
-    marginBottom: 20,
+  tabBar: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
   },
-  footerText: {
-    fontSize: 18,
-    color: 'black',
-    textAlign: 'center',
-    fontStyle: 'italic',
+  tabItem: {
+    alignItems: 'center',
+  },
+  tabText: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 4,
+  },
+  activeTabText: {
+    color: '#3a584a',
+    fontWeight: '500',
   },
 });
+
+export default Footer;
